@@ -23,15 +23,17 @@ export enum Homework2Shaders {
 export enum Homework2Animations {
 	SHIP_IDLE = "idle",
 	SHIP_BOOST = "boost",
-	SHIP_DIE = "dying"
+	SHIP_DIE = "explode",
+
 }
 
-//SHIP_DIE="explode"
+//SHIP_DIE = "dying"
 
 // HOMEWORK 2 - TODO
 /*
  * Make sure this is the key you give to your loaded spritesheet.
  */
 export enum Homework2Names {
-	FLEET_SHIP = "player"
+	FLEET_SHIP = "player",
+	FLOCK_SHIP = "flock"
 }

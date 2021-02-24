@@ -83,6 +83,7 @@ export default class Homework1_Scene extends Scene {
 		this.load.image("space", "hw2_assets/sprites/space.png");
 
 		/* ##### YOUR CODE GOES BELOW THIS LINE ##### */
+		this.load.spritesheet("flock","hw2_assets/spritesheets/fleet_spaceship.json");
 	}
 
 	/*
@@ -230,7 +231,7 @@ export default class Homework1_Scene extends Scene {
 	initializeObjectPools(): void {
 		// Initialize the fleet object pool
 		for (let i = 0; i < this.fleet.length; i++) {
-			this.fleet[i] = this.add.animatedSprite(Homework2Names.FLEET_SHIP, "primary");
+			this.fleet[i] = this.add.animatedSprite(Homework2Names.FLOCK_SHIP, "primary");
 			this.fleet[i].animation.play(Homework2Animations.SHIP_IDLE);
 			this.fleet[i].scale.set(0.3, 0.3);
 			this.fleet[i].visible = false;
