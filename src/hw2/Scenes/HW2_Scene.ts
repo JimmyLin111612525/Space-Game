@@ -83,7 +83,7 @@ export default class Homework1_Scene extends Scene {
 		this.load.image("space", "hw2_assets/sprites/space.png");
 
 		/* ##### YOUR CODE GOES BELOW THIS LINE ##### */
-		this.load.spritesheet("flock","hw2_assets/spritesheets/fleet_spaceship.json");
+		this.load.spritesheet("flock", "hw2_assets/spritesheets/fleet_spaceship.json");
 	}
 
 	/*
@@ -492,12 +492,12 @@ export default class Homework1_Scene extends Scene {
 	 * Check out that class to see how to create colors and access its fields.
 	 */
 	spawnAsteroid(): void {
-		const color1 = { r: 90, g: 80, b: 193};
-		const color2 = { r: 210, g: 216, b: 115};
-		const color3 = { r: 206, g: 119, b: 152};
-		const color4 = { r: 153, g: 222, b: 68};
-		const color5 = { r: 120, b: 36, g: 186};
-		const color6 = { r: 34, g: 137, b: 236};
+		const color1 = { r: 90, g: 80, b: 193 };
+		const color2 = { r: 210, g: 216, b: 115 };
+		const color3 = { r: 206, g: 119, b: 152 };
+		const color4 = { r: 153, g: 222, b: 68 };
+		const color5 = { r: 120, b: 36, g: 186 };
+		const color6 = { r: 34, g: 137, b: 236 };
 
 		const colors = [color1, color2, color3, color4, color5, color6];
 		// Find the first viable asteroid
@@ -581,7 +581,20 @@ export default class Homework1_Scene extends Scene {
 	 */
 	handleScreenWrap(node: GameNode, viewportCenter: Vec2, paddedViewportSize: Vec2): void {
 		// Your code goes here:
+		let x_edge = (paddedViewportSize.x - (viewportCenter.x * 2)) / 2;
+		let y_edge = (paddedViewportSize.y - (viewportCenter.y * 2)) / 2;
 
+		if (node.position.x > (paddedViewportSize.x + x_edge)) {
+			node.position.x = 0;
+		} else if (node.position.x < (0 - x_edge)) {
+			node.position.x = (paddedViewportSize.x + x_edge);
+		}
+
+		if (node.position.y > (paddedViewportSize.y + y_edge)) {
+			node.position.y = 0;
+		} else if (node.position.y < (0 - y_edge)) {
+			node.position.y = (paddedViewportSize.y + y_edge);
+		}
 	}
 
 	// HOMEWORK 2 - TODO
