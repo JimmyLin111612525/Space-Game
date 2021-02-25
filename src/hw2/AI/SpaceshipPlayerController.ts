@@ -49,14 +49,15 @@ export default class SpaceshipPlayerController implements AI {
 
 		this.receiver = new Receiver();
 		this.emitter = new Emitter();
+		this.receiver.subscribe(Homework2Event.PLAYER_DAMAGE);
 	}
 
-	activate(options: Record<string, any>){};
+	activate(options: Record<string, any>) { };
 
 	handleEvent(event: GameEvent): void {
 		// We need to handle animations when we get hurt
-		if(event.type === Homework2Event.PLAYER_DAMAGE){
-			if(event.data.get("shield") === 0){
+		if (event.type === Homework2Event.PLAYER_DAMAGE) {
+			if (event.data.get("shield") === 0) {
 				// Play animation and queue event to end game
 				this.owner.animation.play("explode", false, Homework2Event.PLAYER_DEAD);
 				this.owner.animation.queue("dead", true);
@@ -68,9 +69,9 @@ export default class SpaceshipPlayerController implements AI {
 	}
 
 	update(deltaT: number): void {
-		if(this.isDead) return;
-		
-		while(this.receiver.hasNextEvent()){
+		if (this.isDead) return;
+
+		while (this.receiver.hasNextEvent()) {
 			this.handleEvent(this.receiver.getNextEvent());
 		}
 
@@ -87,21 +88,21 @@ export default class SpaceshipPlayerController implements AI {
 		this.direction.rotateCCW(turnDirection * this.rotationSpeed * deltaT);
 
 		// Update the visual direction of the player
-		this.owner.rotation = -(Math.atan2(this.direction.y, this.direction.x) - Math.PI/2);
-		
+		this.owner.rotation = -(Math.atan2(this.direction.y, this.direction.x) - Math.PI / 2);
+
 		// Move the player
 		this.owner.position.add(this.direction.scaled(-this.speed * deltaT));
 
 		Debug.log("player_pos", "Player Position: " + this.owner.position.toString());
-	
+
 		// If the player clicked, we need to spawn in a fleet member
-		if(Input.isMouseJustPressed()){
-			this.emitter.fireEvent(Homework2Event.SPAWN_FLEET, {position: Input.getGlobalMousePosition()});
+		if (Input.isMouseJustPressed()) {
+			this.emitter.fireEvent(Homework2Event.SPAWN_FLEET, { position: Input.getGlobalMousePosition() });
 		}
 
 		// Animations
-		if(!this.owner.animation.isPlaying("shield") && !this.owner.animation.isPlaying("explode")){
-			if(this.speed > 0){
+		if (!this.owner.animation.isPlaying("shield") && !this.owner.animation.isPlaying("explode")) {
+			if (this.speed > 0) {
 				this.owner.animation.playIfNotAlready("boost");
 			} else {
 				this.owner.animation.playIfNotAlready("idle");

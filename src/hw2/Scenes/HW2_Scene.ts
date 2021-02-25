@@ -457,7 +457,6 @@ export default class Homework1_Scene extends Scene {
 
 						// Send out an event to destroy the ship
 						this.emitter.fireEvent(Homework2Event.SHIP_DAMAGE, { id: ship.id });
-
 						// Exit early - we only need to destroy one ship
 						break;
 					}
@@ -475,7 +474,25 @@ export default class Homework1_Scene extends Scene {
 				// If the asteroid is spawned in and it overlaps the player
 				if (asteroid.visible && Homework1_Scene.checkAABBtoCircleCollision(<AABB>this.player.collisionShape, <Circle>asteroid.collisionShape)) {
 					// Put your code here:
-					asteroid.visible=false;
+					// Kill asteroid
+					asteroid.visible = false;
+					this.numAsteroids -= 1;
+
+					//increase score
+					this.numAsteroidsDestroyed += 1;
+
+					//decrease shield
+					this.playerShield -= 1;
+
+					//invincibility
+					this.playerinvincible=true;
+
+					// Update the gui
+					this.asteroidsLabel.text = `Asteroids: ${this.numAsteroids}`;
+					this.shieldsLabel.text = `Shield: ${this.playerShield}`;
+
+					this.emitter.fireEvent(Homework2Event.PLAYER_DAMAGE,{shield:this.playerShield});
+					
 				}
 			}
 		}
