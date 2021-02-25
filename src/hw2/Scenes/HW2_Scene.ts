@@ -291,7 +291,7 @@ export default class Homework1_Scene extends Scene {
 			ship.visible = true;
 			ship.position = position;
 			ship.setAIActive(true, {});
-
+			ship.animation.play(Homework2Animations.SHIP_BOOST);
 			this.fleetSize += 1;
 			this.mineralAmount -= 2;
 
@@ -485,14 +485,14 @@ export default class Homework1_Scene extends Scene {
 					this.playerShield -= 1;
 
 					//invincibility
-					this.playerinvincible=true;
+					this.playerinvincible = true;
 
 					// Update the gui
 					this.asteroidsLabel.text = `Asteroids: ${this.numAsteroids}`;
 					this.shieldsLabel.text = `Shield: ${this.playerShield}`;
 
-					this.emitter.fireEvent(Homework2Event.PLAYER_DAMAGE,{shield:this.playerShield});
-					
+					this.emitter.fireEvent(Homework2Event.PLAYER_DAMAGE, { shield: this.playerShield });
+
 				}
 			}
 		}

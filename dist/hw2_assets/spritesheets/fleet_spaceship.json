@@ -167,7 +167,7 @@
             ]
         },
         {
-            "name":"dying",
+            "name":"explode",
             "repeat":true,
             "frames":[
                 {
