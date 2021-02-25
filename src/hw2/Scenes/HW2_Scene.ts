@@ -475,7 +475,7 @@ export default class Homework1_Scene extends Scene {
 				// If the asteroid is spawned in and it overlaps the player
 				if (asteroid.visible && Homework1_Scene.checkAABBtoCircleCollision(<AABB>this.player.collisionShape, <Circle>asteroid.collisionShape)) {
 					// Put your code here:
-
+					asteroid.visible=false;
 				}
 			}
 		}
@@ -624,7 +624,27 @@ export default class Homework1_Scene extends Scene {
 	 */
 	static checkAABBtoCircleCollision(aabb: AABB, circle: Circle): boolean {
 		// Your code goes here:
-		return false;
+		const dx = Math.abs(circle.x - aabb.x);
+		const dy = Math.abs(circle.y - aabb.y);
+
+		if (dx > (aabb.hw + circle.r)) {
+			return false;
+		}
+
+		if (dy > (aabb.hh + circle.r)) {
+			return false;
+		}
+
+		if (dx <= (aabb.hw)) {
+			return true;
+		}
+		if (dy <= (aabb.hh)) {
+			return true;
+		}
+
+		const dc_sq = Math.pow((dx - aabb.hw), 2) + Math.pow((dy - aabb.hh), 2);
+
+		return (dc_sq <= Math.pow(circle.r, 2));
 	}
 
 }
