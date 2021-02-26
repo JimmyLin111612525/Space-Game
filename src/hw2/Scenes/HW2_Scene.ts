@@ -452,6 +452,9 @@ export default class Homework1_Scene extends Scene {
 						asteroid.visible = false;
 						this.numAsteroids -= 1;
 
+						//update scire
+						this.numAsteroidsDestroyed+=1;
+
 						// Update the gui
 						this.asteroidsLabel.text = `Asteroids: ${this.numAsteroids}`;
 
